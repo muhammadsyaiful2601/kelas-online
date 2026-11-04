@@ -1,100 +1,79 @@
 # Website Kelas Online Sederhana
 
-Sistem manajemen kelas online berbasis web yang memungkinkan pengunjung melihat katalog kelas dan mendaftar, serta admin untuk mengelola katalog kelas, kategori, dan verifikasi pendaftar.
+Sistem manajemen kelas online sederhana yang memungkinkan calon peserta melihat katalog kelas dan mendaftar, serta Dashboard Admin untuk mengelola katalog kelas, kategori, dan memverifikasi data pendaftar.
 
-**Nama Proyek:** Website Kelas Online Sederhana  
-**Kandidat:** Muhammad Syaiful  
-**Email:** muhammadsyaiful2601@gmail.com  
-**Teknologi Utama:** Laravel 13, PHP 8.4, MySQL / PostgreSQL / SQLite, Tailwind CSS, Blade  
-**Tanggal:** 3 November 2026  
-**Repositori:** https://github.com/muhammadsyaiful2601/kelas-online.git
+Dibangun dengan **Laravel 13**, **PHP 8.4**, **MySQL/PostgreSQL**, **Tailwind CSS**, dan **Blade**.
 
 ---
 
-## Tentang Sistem
+## 📋 Daftar Isi
 
-Website Kelas Online Sederhana adalah platform pelatihan teknologi yang terdiri dari dua bagian utama:
+- [Tentang Proyek](#tentang-proyek)
+- [Peran Pengguna](#peran-pengguna)
+- [Fitur Utama](#fitur-utama)
+- [Persyaratan Sistem](#persyaratan-sistem)
+- [Tahapan Instalasi](#tahapan-instalasi)
+- [Konfigurasi Database](#konfigurasi-database)
+- [Kredensial Akun Admin](#kredensial-akun-admin)
+- [Struktur Database](#struktur-database)
+- [Library Pihak Ketiga](#library-pihak-ketiga)
+- [Cara Menjalankan](#cara-menjalankan)
+- [Testing](#testing)
+- [Lisensi](#lisensi)
 
-1. **Landing Page (Public)** — Akses tanpa login. Pengunjung dapat melihat daftar kelas yang sudah dipublikasikan, mencari dan memfilter kelas berdasarkan kategori, melihat detail kelas, dan mengisi formulir pendaftaran.
-2. **Dashboard Admin (Terautentikasi)** — Akses terbatas (harus login). Admin dapat melihat statistik ringkasan, mengelola kategori dan kelas (CRUD dengan upload gambar dan status DRAFT/PUBLISHED), serta memverifikasi status pendaftar (PENDING / APPROVED / REJECTED).
+---
 
-Sistem ini mencegah registrasi ganda: satu alamat email tidak dapat mendaftar dua kali pada kelas yang sama.
+## Tentang Proyek
+
+Platform web sederhana untuk lembaga pelatihan teknologi yang memungkinkan:
+
+- **Pengunjung (Guest):** Melihat landing page, mencari/memfilter kelas, melihat detail kelas, dan mengisi formulir pendaftaran.
+- **Admin:** Mengakses dashboard aman untuk mengelola kategori, kelas (termasuk upload gambar dan status DRAFT/PUBLISHED), serta memverifikasi status pendaftar (PENDING, APPROVED, REJECTED).
+
+---
+
+## Peran Pengguna
+
+| Peran | Akses | Deskripsi |
+|-------|-------|-----------|
+| **Pengunjung** | Publik (tanpa login) | Melihat katalog kelas published, mencari & memfilter kelas, detail kelas, pendaftaran kelas. |
+| **Admin** | Terbatas (butuh login) | Dashboard ringkasan, CRUD kategori & kelas, upload gambar, set status kelas, verifikasi pendaftar. |
 
 ---
 
 ## Fitur Utama
 
-### Pengunjung (Guest / Publik)
-- Melihat halaman utama (Hero Section, informasi platform, kontak)
-- Melihat katalog kelas dengan status `PUBLISHED`
-- Mencari kelas berdasarkan judul/deskripsi
-- Memfilter kelas berdasarkan kategori
-- Pagination pada daftar kelas
-- Melihat detail kelas (deskripsi, instrutor, harga, gambar)
-- Mendaftar kelas melalui formulir (Nama, Email, No. HP)
-- Pencegahan registrasi ganda (email unik per kelas)
-
-### Admin (Auth)
-- Login dan logout aman (Laravel Breeze / Auth session)
-- Statistik ringkasan (total kelas, total pendaftar, 5 pendaftar terbaru)
-- Kelola Kategori (CRUD)
-- Kelola Kelas (CRUD + upload gambar + status DRAFT/PUBLISHED)
-- Kelola Pendaftar (lihat daftar per kelas, ubah status PENDING/APPROVED/REJECTED)
-- Export data pendaftar ke CSV (fitur bonus)
-
----
-
-## Teknologi yang Digunakan
-
-| Komponen | Versi / Nama |
-|----------|--------------|
-| PHP | 8.4 (cocok 8.3 / 8.5) |
-| Framework | Laravel 13 |
-| Database | MySQL / PostgreSQL / SQLite (default proyek ini SQLite) |
-| Frontend | Tailwind CSS, Blade, Vite |
-| Autentikasi | Laravel Breeze (Blade) |
-| Testing | Pest / PHPUnit |
-| Package Manager | Composer, NPM |
+- Landing page responsif dengan hero section, katalog kelas, dan kontak.
+- Katalog kelas yang statusnya `PUBLISHED` dengan pencarian (judul/deskripsi) dan filter kategori.
+- Pagination pada daftar kelas.
+- Halaman detail kelas dengan deskripsi, instruktur, harga, dan formulir pendaftaran (Nama, Email, No. HP).
+- Pencegahan registrasi ganda (satu email tidak dapat mendaftar dua kali pada kelas yang sama) melalui unique composite constraint.
+- Autentikasi admin (login/logout) dengan Laravel Breeze / session.
+- Dashboard admin: total kelas, total pendaftar, dan 5 pendaftar terbaru.
+- CRUD kategori kelas.
+- CRUD kelas dengan upload gambar dan penetapan status (`DRAFT` / `PUBLISHED`).
+- Kelola pendaftar: daftar per kelas dan dropdown update status (`PENDING`, `APPROVED`, `REJECTED`).
+- Export data pendaftar ke CSV (fitur bonus).
+- Automated test untuk pencegahan registrasi ganda.
 
 ---
 
 ## Persyaratan Sistem
 
-Sebelum instalasi, pastikan sudah terinstall:
-
-- **PHP 8.3+** (disarankan 8.4)
-- **Composer 2.x**
-- **Node.js & NPM** (untuk compile asset Tailwind/Vite)
-- **Database server** (MySQL, PostgreSQL, atau gunakan SQLite bawaan)
-- **Git**
+| Komponen | Versi |
+|----------|-------|
+| PHP | 8.3 atau 8.4+ |
+| Laravel | 13.x |
+| Database | MySQL atau PostgreSQL |
+| Composer | 2.x |
+| Node.js / npm | Untuk compile asset (Tailwind) |
+| Web Server | Apache / Nginx (atau `php artisan serve`) |
 
 ---
 
-## Struktur Database
+## Tahapan Instalasi
 
-Proyek ini menggunakan 4 tabel utama beserta relasi Eloquent:
-
-| Tabel | Deskripsi |
-|-------|-----------|
-| `categories` | Kategori kelas (Pemrograman, Desain, Bisnis, Bahasa, dst.) |
-| `courses` | Data kelas (terkait kategori, status DRAFT/PUBLISHED, harga, gambar) |
-| `enrollments` | Data pendaftar (terkait kelas, nama, email, no HP, status) |
-| `users` | Akun admin (auth) |
-
-### Relasi Eloquent
-- `Category` **hasMany** `Course`
-- `Course` **belongsTo** `Category` & **hasMany** `Enrollment`
-- `Enrollment` **belongsTo** `Course`
-
-### Enum
-- `CourseStatus`: `DRAFT`, `PUBLISHED`
-- `EnrollmentStatus`: `PENDING`, `APPROVED`, `REJECTED`
-
-### Constraint Khusus
-- Tabel `enrollments` memiliki **unique composite constraint** pada `['course_id', 'email']` untuk mencegah registrasi ganda.
-
-
-## Panduan Instalasi
+Ikuti langkah-langkah berikut untuk menjalankan proyek secara lokal:
 
 ### 1. Clone Repositori
 
@@ -109,72 +88,20 @@ cd kelas-online
 composer install
 ```
 
-### 3. Install Dependensi Frontend (NPM)
+---
 
-```bash
-npm install
-npm run build
-```
+## Konfigurasi Database
 
-### 4. Salin dan Konfigurasi File `.env`
-
-Salin file contoh menjadi `.env`:
-
-```bash
-cp .env.example .env
-```
-
-Generate application key:
-
-```bash
-php artisan key:generate
-```
-
-Edit file `.env` dan sesuaikan koneksi database. Contoh menggunakan **SQLite** (default, siap pakai tanpa server database eksternal):
-
-```env
-DB_CONNECTION=sqlite
-# DB_HOST=127.0.0.1
-# DB_PORT=3306
-# DB_DATABASE=laravel
-# DB_USERNAME=root
-# DB_PASSWORD=
-```
-
-Atau jika ingin menggunakan **MySQL**, ubah menjadi:
+File `.env` yang relevan:
 
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravel
+DB_DATABASE=nama_database_anda
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=password_anda
 ```
-
-> **Penting:** Pastikan database `laravel` sudah dibuat di MySQL/PostgreSQL sebelum menjalankan migrasi.
-
-### 5. Jalankan Migrasi dan Seeder
-
-```bash
-php artisan migrate --seed
-```
-
-Perintah ini akan membuat semua tabel dan memasukkan data dummy (kategori, kelas, dan akun admin).
-
-### 6. Link Storage (untuk akses gambar kelas publik)
-
-```bash
-php artisan storage:link
-```
-
-### 7. Jalankan Server Pengembangan
-
-```bash
-php artisan serve
-```
-
-Buka browser dan kunjungi: `http://127.0.0.1:8000`
 
 ---
 
@@ -187,38 +114,137 @@ Setelah menjalankan `php artisan migrate --seed`, akun admin default tersedia:
 | Email | `admin@gmail.com` |
 | Password | `password` |
 
-Gunakan kredensial ini untuk login ke halaman admin (`/login` atau `/admin`).
+Gunakan kredensial ini untuk login ke halaman admin (`/login`).
 
 ---
 
-## Library / Pihak Ketiga yang Digunakan
+## Struktur Database
 
-### Composer (PHP)
-- `laravel/framework` v13 — Framework web PHP
-- `laravel/tinker` — Console REPL untuk Laravel
-- `laravel/breeze` — Starter kit autentikasi (Blade)
-- `nesbot/carbon` — Manipulasi tanggal dan waktu
-- `ramsey/uuid` — Generate UUID
-- `guzzlehttp/guzzle` — HTTP client
-- `mockery/mockery` & `phpunit/phpunit` — Testing
-- `laravel/pint` — Code style formatter
+Tabel utama yang dibuat oleh migrasi:
 
-### NPM (Frontend)
-- `tailwindcss` — CSS framework utility-first
-- `vite` — Build tool / dev server
-- `laravel-vite-plugin` — Integrasi Vite dengan Laravel
+### `categories`
+- `id` (PK)
+- `name`, `slug` (unique), `description`
+- `timestamps`
+
+### `courses`
+- `id` (PK)
+- `category_id` (FK → categories)
+- `title`, `slug` (unique), `description`, `instructor`
+- `price` (decimal), `is_free` (boolean)
+- `image` (nullable)
+- `status` (`DRAFT` / `PUBLISHED`)
+- `soft_deletes`, `timestamps`
 
 ---
 
-## Catatan Penting
+## Library Pihak Ketiga
 
-- File `.env` **tidak di-commit ke GitHub** (sudah tercantum di `.gitignore`) karena berisi informasi sensitif seperti `APP_KEY` dan kredensial database. Setiap developer harus menyalin `.env.example` dan mengkonfigurasi sendiri.
-- Jika menggunakan SQLite, file database akan otomatis dibuat di `database/database.sqlite`. Tidak perlu install server database terpisah.
-- Untuk upload gambar kelas, pastikan `php artisan storage:link` sudah dijalankan agar gambar dapat diakses melalui `public/storage`.
+Berikut daftar library/package yang digunakan dalam proyek ini:
+
+| Package | Fungsi |
+|---------|--------|
+| `laravel/framework` | Framework PHP inti (Laravel 13) |
+| `laravel/breeze` | Starter kit autentikasi (Blade) |
+| `tailwindcss` | CSS utility-first framework |
+| `vite` | Build tool untuk asset frontend |
+| `phpunit/phpunit` | Framework testing |
+| `nesbot/carbon` | Manipulasi tanggal dan waktu |
+| `guzzlehttp/guzzle` | HTTP client |
+
+Semua terdaftar dalam `composer.json` dan `package.json`.
+
+---
+
+## Cara Menjalankan
+
+```bash
+# Menjalankan server development
+php artisan serve
+
+# Compile asset untuk production
+npm run build
+
+# Jalankan semua automated test
+php artisan test
+```
+
+---
+
+## Testing
+
+Proyek menyertakan automated test untuk memastikan pencegahan registrasi ganda berfungsi dengan benar. Jalankan semua test dengan:
+
+```bash
+php artisan test
+```
 
 ---
 
 ## Lisensi
 
-Proyek ini bersifat terbuka untuk pembelajaran dan portofolio.
+Proyek ini bersifat terbuka dan dikembangkan sebagai bagian dari proses wawancara teknis.
+
 ---
+
+## Catatan
+
+- File `.env` **tidak di-upload ke GitHub** (sudah di-ecualikan melalui `.gitignore`) untuk alasan keamanan.
+- Pastikan `php artisan storage:link` dijalankan agar gambar kelas dapat diakses secara publik.
+- Database default yang digunakan adalah MySQL; untuk PostgreSQL, sesuaikan `DB_CONNECTION=pgsql` di `.env`.
+
+### `enrollments`
+- `id` (PK)
+- `course_id` (FK → courses)
+- `name`, `email`, `phone` (nullable)
+- `status` (`PENDING` / `APPROVED` / `REJECTED`)
+- **Unique composite:** `['course_id', 'email']` — mencegah pendaftaran ganda dengan email yang sama pada kelas yang sama.
+- `timestamps`
+
+### Relasi Eloquent
+- `Category` `hasMany` `Course`
+- `Course` `belongsTo` `Category` & `hasMany` `Enrollment`
+- `Enrollment` `belongsTo` `Course`
+
+### Enums (PHP Native)
+- `CourseStatus`: `DRAFT`, `PUBLISHED`
+- `EnrollmentStatus`: `PENDING`, `APPROVED`, `REJECTED`
+
+### 3. Salin File Konfigurasi Environment
+
+Salin `.env.example` menjadi `.env`:
+
+```bash
+copy .env.example .env
+```
+
+> **Penting:** File `.env` **tidak** di-commit ke Git (sudah ada di `.gitignore`) karena berisi kredensial sensitif. Buat file `.env` sendiri di komputer lokal.
+
+### 4. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Konfigurasi Database
+
+Buka file `.env` dan sesuaikan pengaturan database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kelas_online
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Pastikan database `kelas_online` sudah dibuat di MySQL/PostgreSQL sebelum menjalankan migrasi.
+
+### 6. Jalankan Migrasi dan Seeder
+
+```bash
+php artisan migrate --seed
+```
+
+Perintah ini akan membuat semua tabel dan menambahkan data dummy: kategori, kelas, dan akun admin default.
