@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Kelas Online') }}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,36 +21,45 @@
         <style>
             .login-bg-pattern {
                 background-image:
-                    radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 20%),
-                    radial-gradient(circle at 100% 0%, #3b82f6 0%, transparent 20%),
-                    radial-gradient(circle at 0% 100%, #3b82f6 0%, transparent 20%),
-                    radial-gradient(circle at 100% 100%, #3b82f6 0%, transparent 20%);
-                background-size: 100px 100px;
-                background-position: 0 0, 0 50px, 50px 0, 50px 50px;
-                background-repeat: repeat;
+                    radial-gradient(circle at 15% 15%, rgba(99, 102, 241, .35) 0, transparent 24%),
+                    radial-gradient(circle at 85% 85%, rgba(14, 165, 233, .2) 0, transparent 26%),
+                    linear-gradient(135deg, #111827 0%, #1e1b4b 52%, #312e81 100%);
             }
         </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased min-h-screen flex flex-col relative overflow-hidden">
-        <!-- Left decorative section (desktop only) -->
-        <div class="hidden lg:flex lg:w-1/2 h-screen bg-[#0f172a] login-bg-pattern flex-col justify-center items-center p-8 text-center">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500 text-white mb-6 shadow-lg">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2-2m-2-4h.01M17 16a4 4 0 01-8 0 4 4 0 018 0z"></path>
-                </svg>
-            </div>
-            <h1 class="text-4xl font-bold text-white mb-4">Selamat Datang di Kelas Online</h1>
-            <p class="text-blue-100 text-lg max-w-md leading-relaxed">
-                Tempat terbaik untuk mempelajari berbagai keterampilan baru dengan instruktur terbaik.
-                Mulai perjalanan pembelajaran Anda hari ini.
-            </p>
-        </div>
+    <body class="font-sans text-slate-900 antialiased">
+        <main class="flex min-h-screen flex-col lg:flex-row">
+            <!-- Brand section -->
+            <section class="login-bg-pattern relative flex min-h-[280px] w-full flex-col justify-between overflow-hidden px-8 py-8 text-white sm:px-12 lg:min-h-screen lg:w-1/2 lg:px-16 lg:py-12">
+                <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full border border-white/10"></div>
+                <div class="absolute -bottom-28 -left-20 h-80 w-80 rounded-full border border-white/10"></div>
 
-        <!-- Right login form section -->
-        <div class="flex-1 flex items-center justify-center p-6 sm:p-12 bg-white">
-            <div class="w-full max-w-md">
-                {{ $slot }}
-            </div>
-        </div>
+                <div class="relative flex items-center gap-3">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="h-10 w-10 rounded-xl object-cover shadow-lg">
+                    <span class="text-xl font-bold tracking-tight">Kelas<span class="text-indigo-300">Online</span></span>
+                </div>
+
+                <div class="relative max-w-lg py-10 lg:py-0">
+                    <p class="mb-4 text-sm font-semibold uppercase tracking-[.25em] text-indigo-200">Belajar tanpa batas</p>
+                    <h1 class="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Kembangkan kemampuan, raih peluang baru.</h1>
+                    <p class="mt-5 max-w-md text-base leading-relaxed text-indigo-100/80 sm:text-lg">
+                        Akses kelas pilihan dan lanjutkan perjalanan belajar Anda bersama KelasOnline.
+                    </p>
+                    <div class="mt-8 hidden items-center gap-3 text-sm text-indigo-100/80 sm:flex">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">✓</span>
+                        Materi terarah untuk tujuan Anda
+                    </div>
+                </div>
+
+                <p class="relative hidden text-xs text-indigo-200/70 lg:block">© {{ date('Y') }} KelasOnline. Semua hak dilindungi.</p>
+            </section>
+
+            <!-- Login form section -->
+            <section class="flex w-full flex-1 items-center justify-center bg-slate-50 px-6 py-10 sm:px-12 lg:w-1/2 lg:px-20">
+                <div class="w-full max-w-md">
+                    {{ $slot }}
+                </div>
+            </section>
+        </main>
     </body>
 </html>
