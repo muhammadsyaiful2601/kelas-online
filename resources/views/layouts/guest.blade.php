@@ -13,18 +13,26 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+        <style>
+            .login-bg-pattern {
+                background-image:
+                    radial-gradient(circle at 0% 0%, #3b82f6 0%, transparent 20%),
+                    radial-gradient(circle at 100% 0%, #3b82f6 0%, transparent 20%),
+                    radial-gradient(circle at 0% 100%, #3b82f6 0%, transparent 20%),
+                    radial-gradient(circle at 100% 100%, #3b82f6 0%, transparent 20%);
+                background-size: 100px 100px;
+                background-position: 0 0, 0 50px, 50px 0, 50px 50px;
+                background-repeat: repeat;
+            }
+        </style>
+    </head>
+    <body class="font-sans text-gray-900 antialiased min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden">
+        <!-- Dark blue geometric background on right (desktop) -->
+        <div class="hidden lg:block absolute top-0 right-0 w-2/3 h-full bg-[#0f172a] login-bg-pattern"></div>
+        
+        <div class="relative z-10 w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-2xl overflow-hidden sm:rounded-2xl">
+            {{ $slot }}
         </div>
     </body>
 </html>
