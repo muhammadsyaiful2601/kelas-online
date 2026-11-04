@@ -17,7 +17,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-xs font-bold text-white shadow-sm">KO</div>
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="h-9 w-9 rounded-xl object-cover shadow-sm">
                     <span class="text-xl font-bold tracking-tight text-indigo-600">Kelas<span class="text-slate-900">Online</span></span>
                 </div>
                 <div class="flex items-center gap-4">
