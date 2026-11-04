@@ -27,12 +27,26 @@
             }
         </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden">
-        <!-- Dark blue geometric background on right (desktop) -->
-        <div class="hidden lg:block absolute top-0 right-0 w-2/3 h-full bg-[#0f172a] login-bg-pattern"></div>
-        
-        <div class="relative z-10 w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-2xl overflow-hidden sm:rounded-2xl">
-            {{ $slot }}
+    <body class="font-sans text-gray-900 antialiased min-h-screen flex flex-col relative overflow-hidden">
+        <!-- Left decorative section (desktop only) -->
+        <div class="hidden lg:flex lg:w-1/2 h-screen bg-[#0f172a] login-bg-pattern flex-col justify-center items-center p-8 text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500 text-white mb-6 shadow-lg">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2-2m-2-4h.01M17 16a4 4 0 01-8 0 4 4 0 018 0z"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold text-white mb-4">Selamat Datang di Kelas Online</h1>
+            <p class="text-blue-100 text-lg max-w-md leading-relaxed">
+                Tempat terbaik untuk mempelajari berbagai keterampilan baru dengan instruktur terbaik.
+                Mulai perjalanan pembelajaran Anda hari ini.
+            </p>
+        </div>
+
+        <!-- Right login form section -->
+        <div class="flex-1 flex items-center justify-center p-6 sm:p-12 bg-white">
+            <div class="w-full max-w-md">
+                {{ $slot }}
+            </div>
         </div>
     </body>
 </html>
