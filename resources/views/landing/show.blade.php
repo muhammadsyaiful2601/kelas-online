@@ -6,6 +6,8 @@
     <title>{{ $course->title }} - Kelas Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
