@@ -3,6 +3,16 @@
 @section('title', 'Kelola Pendaftar')
 
 @section('content')
+    @php
+        $exportParams = [];
+        if (request()->filled('course_id')) {
+            $exportParams['course_id'] = request('course_id');
+        }
+        if (request()->filled('status')) {
+            $exportParams['status'] = request('status');
+        }
+    @endphp
+
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-900">Kelola Pendaftar</h1>
         <p class="text-gray-600">Lihat daftar pendaftar dan perbarui status verifikasi.</p>
@@ -44,6 +54,12 @@
                 <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium transition">Filter</button>
                 <a href="{{ route('admin.enrollments.index') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm hover:bg-gray-50 transition">Reset</a>
             </form>
+
+            <a href="{{ route('admin.enrollments.export', $exportParams) }}"
+               class="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium transition flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Export Excel
+            </a>
         </div>
 
         <div class="overflow-x-auto">

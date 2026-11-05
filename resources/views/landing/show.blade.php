@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $course->title }} - Kelas Online</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
     <!-- Navbar -->
-    <nav class="border-b border-slate-200 bg-white shadow-sm">
+    <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="h-9 w-9 rounded-xl object-cover shadow-sm">
-                    <span class="text-xl font-bold tracking-tight text-indigo-600">Kelas<span class="text-slate-900">Online</span></span>
-                </div>
+                <a href="{{ route('landing.index') }}" aria-label="KelasOnline beranda"><x-brand-logo /></a>
                 <div class="flex items-center gap-4">
-                    <a href="{{ route('landing.index') }}" class="font-medium text-slate-600 transition hover:text-indigo-600">Kembali ke Katalog</a>
+                    <a href="{{ route('landing.index') }}" class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-slate-300 text-sm font-semibold text-slate-600 bg-white hover:bg-slate-50 transition">Kembali ke Katalog</a>
                     @auth
                         <a href="{{ route('admin.dashboard') }}" class="font-medium text-slate-600 transition hover:text-indigo-600">Dashboard Admin</a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -31,7 +23,7 @@
                             <button type="submit" class="font-medium text-slate-600 transition hover:text-rose-600">Logout</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="font-medium text-slate-600 transition hover:text-indigo-600">Masuk</a>
+                        <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-slate-300 text-sm font-semibold text-slate-600 bg-white hover:bg-slate-50 transition">Masuk</a>
                     @endauth
                 </div>
             </div>
@@ -63,16 +55,13 @@
                     <img src="{{ \Illuminate\Support\Facades\Storage::url($course->image) }}" alt="{{ $course->title }}"
                          class="w-full h-64 object-cover">
                 @else
-                    <div class="flex h-64 w-full items-center justify-center bg-slate-100 text-sm text-slate-400">Tanpa Gambar</div>
+                    <div class="flex h-64 w-full items-center justify-center bg-gradient-to-br from-indigo-700 via-indigo-600 to-violet-500 text-white" role="img" aria-label="Ilustrasi kelas {{ $course->category->name }}">
+                        <svg class="h-14 w-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v11.494m0-11.494A4.5 4.5 0 0116.5 3.5H19v14.75h-2.5A4.5 4.5 0 0012 20.5m0-14.247A4.5 4.5 0 007.5 3.5H5v14.75h2.5A4.5 4.5 0 0112 20.5"/></svg>
+                    </div>
                 @endif
 
                 <div class="p-6">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full
-                            @if($course->status->value === 'PUBLISHED') bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200 @else bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200 @endif
-                        ">
-                            {{ ucfirst(strtolower($course->status->value)) }}
-                        </span>
                         @if ($course->is_free)
                             <span class="rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-200">Gratis</span>
                         @endif
@@ -90,7 +79,7 @@
                         <p class="leading-relaxed text-slate-600">{{ $course->description }}</p>
                     </div>
 
-                    <a href="{{ route('landing.index') }}" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                    <a href="{{ route('landing.index') }}" class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-slate-300 text-sm font-semibold text-slate-600 bg-white hover:bg-slate-50 transition">
                         <span class="mr-1">←</span> Kembali ke Katalog
                     </a>
                 </div>

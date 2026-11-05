@@ -8,7 +8,6 @@
         <title>{{ config('app.name', 'Kelas Online') }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
 
         <!-- Fonts -->
@@ -35,8 +34,7 @@
                 <div class="absolute -bottom-28 -left-20 h-80 w-80 rounded-full border border-white/10"></div>
 
                 <div class="relative flex items-center gap-3">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="h-10 w-10 rounded-xl object-cover shadow-lg">
-                    <span class="text-xl font-bold tracking-tight">Kelas<span class="text-indigo-300">Online</span></span>
+                    <x-brand-logo dark size="lg" />
                 </div>
 
                 <div class="relative max-w-lg py-10 lg:py-0">

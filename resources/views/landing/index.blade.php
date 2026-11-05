@@ -1,129 +1,148 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Kelas - Kelas Online</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-900">
+<x-public-layout>
+    <x-slot:title>KelasOnline — Belajar tanpa batas</x-slot:title>
 
-    <!-- Navbar -->
-    <nav class="border-b border-slate-200 bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="h-9 w-9 rounded-xl object-cover shadow-sm">
-                    <span class="text-xl font-bold tracking-tight text-indigo-600">Kelas<span class="text-slate-900">Online</span></span>
+    {{-- Hero --}}
+    <section class="relative isolate overflow-hidden bg-gradient-to-br from-slate-950 via-brand-dark to-indigo-600 text-white">
+        <div class="absolute inset-0 opacity-30"
+             style="background-image: radial-gradient(circle at 15% 25%, #818cf8 0, transparent 26%), radial-gradient(circle at 85% 80%, #c4b5fd 0, transparent 24%)"></div>
+
+        <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:px-8 lg:py-24">
+            <div>
+                <p class="mb-4 text-sm font-semibold uppercase tracking-[.2em] text-indigo-200">Belajar tanpa batas</p>
+                <h1 class="max-w-xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+                    Kembangkan kemampuan untuk peluang yang lebih besar.
+                </h1>
+                <p class="mt-6 max-w-xl text-base leading-7 text-indigo-100 sm:text-lg">
+                    Temukan kelas terarah dari instruktur terpercaya, lalu belajar dengan langkah yang jelas.
+                </p>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="#kelas" class="inline-flex h-12 items-center justify-center rounded-xl bg-white px-6 text-sm font-semibold text-indigo-700 shadow-lg transition hover:bg-indigo-50 ui-focus">
+                        Jelajahi Kelas <span class="ml-2">→</span>
+                    </a>
                 </div>
-                <div class="flex items-center gap-4">
-                    <a href="{{ route('landing.index') }}" class="font-medium text-indigo-600">Beranda</a>
-                    @auth
-                        <a href="{{ route('admin.dashboard') }}" class="font-medium text-slate-600 transition hover:text-indigo-600">Dashboard Admin</a>
-                        <form method="POST" action="{{ route('logout') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="font-medium text-slate-600 transition hover:text-rose-600">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="font-medium text-slate-600 transition hover:text-indigo-600">Masuk</a>
-                    @endauth
+            </div>
+
+            <div class="relative mx-auto w-full max-w-md" aria-hidden="true">
+                <div class="absolute -inset-6 rounded-[2rem] bg-indigo-400/20 blur-2xl"></div>
+                <div class="relative rotate-2 rounded-2xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur">
+                    <div class="rounded-xl bg-white p-5 text-slate-900 shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">Kelas Pilihan</span>
+                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">✓</span>
+                        </div>
+                        <div class="mt-5 h-3 w-3/4 rounded-full bg-slate-200"></div>
+                        <div class="mt-3 h-3 w-1/2 rounded-full bg-slate-100"></div>
+                        <div class="mt-7 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <span class="text-sm text-slate-500">Belajar sesuai ritmemu</span>
+                            <span class="text-sm font-bold text-indigo-600">Mulai →</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="bg-indigo-700 py-14 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="mb-3 text-sm font-semibold uppercase tracking-[.2em] text-indigo-200">Belajar tanpa batas</p>
-            <h1 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">Kelas Online untuk Semua</h1>
-            <p class="mb-2 max-w-2xl text-indigo-100">
-                Temukan berbagai kelas online terbaik dari instruktur terpercaya. Daftar sekarang dan mulailah belajar.
-            </p>
+        <div class="relative border-t border-white/10 bg-slate-950/20">
+            <dl class="mx-auto grid max-w-7xl grid-cols-3 divide-x divide-white/10 px-4 sm:px-6 lg:px-8">
+                @foreach ([['Kelas tersedia', $stats['courses']], ['Peserta terdaftar', $stats['enrollments']], ['Kategori', $stats['categories']]] as [$label, $value])
+                    <div class="py-5 text-center">
+                        <dt class="text-xs text-indigo-200">{{ $label }}</dt>
+                        <dd class="mt-1 text-xl font-bold">{{ number_format($value) }}</dd>
+                    </div>
+                @endforeach
+            </dl>
         </div>
-    </header>
+    </section>
 
-    <!-- Search & Filter -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <form method="GET" action="{{ route('landing.index') }}" class="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="flex flex-col sm:flex-row gap-4 items-end">
-                <div class="flex-1">
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Cari kelas</label>
-                    <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Judul atau deskripsi kelas..."
-                        class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500">
+    {{-- Class catalogue --}}
+    <section id="kelas" class="scroll-mt-20 px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+            <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+                <div>
+                    <p class="text-sm font-semibold text-indigo-600">Temukan kelasmu</p>
+                    <h2 class="mt-1 text-3xl font-bold tracking-tight text-slate-900">Kelas terbaru untuk Anda</h2>
                 </div>
-                <div class="flex-1">
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Kategori</label>
-                    <select name="category_id" class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500">
-                        <option value="">Semua Kategori</option>
+                <p class="text-sm text-slate-500">{{ $courses->total() }} kelas ditemukan</p>
+            </div>
+
+            <form method="GET" action="{{ route('landing.index') }}" class="ui-card mb-8 grid gap-4 p-4 md:grid-cols-[minmax(0,1fr)_minmax(180px,.55fr)_auto] md:items-end">
+                <div>
+                    <label for="search" class="mb-1.5 block text-sm font-medium text-slate-700">Cari kelas</label>
+                    <div class="relative">
+                        <svg class="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35m2.35-5.65a8 8 0 11-16 0 8 8 0 0116 0z"/>
+                        </svg>
+                        <input id="search" type="search" name="search" value="{{ request('search') }}" placeholder="Judul atau deskripsi kelas..." class="ui-control w-full pl-10">
+                    </div>
+                </div>
+                <div>
+                    <label for="category_id" class="mb-1.5 block text-sm font-medium text-slate-700">Kategori</label>
+                    <select id="category_id" name="category_id" class="ui-control w-full">
+                        <option value="">Semua kategori</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
+                            <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="rounded-lg bg-indigo-600 px-6 py-2 font-semibold text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    Tampilkan
-                </button>
-            </div>
-        </form>
-
-        <!-- Kursus Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @forelse ($courses as $course)
-                <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-                    @if ($course->image)
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url($course->image) }}" alt="{{ $course->title }}"
-                             class="w-full h-48 object-cover">
-                    @else
-                        <div class="flex h-48 w-full items-center justify-center bg-slate-100 text-sm text-slate-400">Tanpa Gambar</div>
+                <div class="flex gap-2">
+                    <x-button type="submit" class="flex-1">Tampilkan</x-button>
+                    @if(request()->filled('search') || request()->filled('category_id'))
+                        <a href="{{ route('landing.index') }}" class="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300 px-4 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 ui-focus">Reset</a>
                     @endif
-
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="rounded bg-indigo-50 px-2 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-700">
-                                {{ $course->category->name }}
-                            </span>
-                            <span class="text-xs font-semibold
-                                @if($course->status->value === 'PUBLISHED') text-emerald-600 @else text-amber-600 @endif
-                            ">
-                                {{ ucfirst(strtolower($course->status->value)) }}
-                            </span>
-                        </div>
-
-                        <h3 class="mb-1 text-lg font-bold text-slate-900">{{ $course->title }}</h3>
-                        <p class="mb-3 line-clamp-2 text-sm text-slate-500">{{ $course->description }}</p>
-
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-lg font-bold text-slate-900">
-                                {{ $course->is_free ? 'Gratis' : 'Rp ' . number_format($course->price, 0, ',', '.') }}
-                            </span>
-                            <span class="text-xs text-slate-500">{{ $course->instructor }}</span>
-                        </div>
-
-                        <a href="{{ route('landing.show', $course->slug) }}"
-                           class="block w-full rounded-lg bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-indigo-700">
-                            Lihat Detail & Daftar
-                        </a>
-                    </div>
                 </div>
-            @empty
-                <div class="col-span-full py-10 text-center text-slate-500">
-                    Tidak ada kelas yang ditemukan.
+            </form>
+
+            @if ($courses->count())
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($courses as $course)
+                        <x-course-card :course="$course" />
+                    @endforeach
                 </div>
-            @endforelse
+            @else
+                <div class="ui-card py-14 text-center">
+                    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">⌕</div>
+                    <h3 class="mt-5 text-lg font-bold text-slate-900">Belum ada kelas yang cocok</h3>
+                    <p class="mt-2 text-sm text-slate-500">Coba ubah kata kunci atau pilih kategori lain.</p>
+                    @if(request()->filled('search') || request()->filled('category_id'))
+                        <a href="{{ route('landing.index') }}" class="mt-6 inline-flex h-11 items-center justify-center rounded-xl bg-indigo-600 px-5 text-sm font-semibold text-white ui-focus">Reset filter</a>
+                    @endif
+                </div>
+            @endif
+
+            <div class="mt-10">{{ $courses->links() }}</div>
         </div>
+    </section>
 
-        {{ $courses->links() }}
-    </div>
+    {{-- How it works --}}
+    <section id="cara-kerja" class="scroll-mt-20 border-y border-slate-200 bg-white px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+            <p class="text-sm font-semibold text-indigo-600">Cara kerja</p>
+            <h2 class="mt-1 text-3xl font-bold tracking-tight">Mulai belajar dalam tiga langkah</h2>
+            <div class="mt-10 grid gap-6 md:grid-cols-3">
+                @foreach ([['01', 'Daftar akun', 'Buat akun gratis untuk menyimpan pilihan kelas Anda.'], ['02', 'Pilih kelas', 'Cari kelas sesuai minat dan tujuan belajar Anda.'], ['03', 'Verifikasi lalu belajar', 'Kami verifikasi pendaftaran, lalu Anda siap memulai.']] as [$number, $title, $text])
+                    <article class="ui-card p-6">
+                        <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-sm font-bold text-indigo-700">{{ $number }}</span>
+                        <h3 class="mt-5 text-lg font-bold">{{ $title }}</h3>
+                        <p class="mt-2 text-sm leading-6 text-slate-500">{{ $text }}</p>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
 
-</body>
-</html>
+    {{-- Benefits --}}
+    <section class="px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+            <p class="text-sm font-semibold text-indigo-600">Kenapa KelasOnline</p>
+            <h2 class="mt-1 text-3xl font-bold tracking-tight">Belajar lebih fokus, progres lebih jelas</h2>
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach ([['◷', 'Fleksibel', 'Belajar dari mana saja, sesuai ritme Anda.'], ['✓', 'Terarah', 'Kelas dirancang untuk langkah belajar yang jelas.'], ['☆', 'Instruktur tepercaya', 'Belajar langsung dari praktisi berpengalaman.'], ['◉', 'Akses praktis', 'Pendaftaran mudah dengan status yang transparan.']] as [$icon, $title, $text])
+                    <article class="rounded-2xl p-2">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-100 text-lg text-indigo-700">{{ $icon }}</span>
+                        <h3 class="mt-4 font-bold text-slate-900">{{ $title }}</h3>
+                        <p class="mt-2 text-sm leading-6 text-slate-500">{{ $text }}</p>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
+</x-public-layout>

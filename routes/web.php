@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('courses', CourseController::class);
 
         Route::get('/enrollments', [EnrollmentController::class, 'index'])->name('enrollments.index');
+        Route::get('/enrollments/export', [EnrollmentController::class, 'export'])->name('enrollments.export');
         Route::get('/enrollments/{enrollment}', [EnrollmentController::class, 'show'])->name('enrollments.show');
         Route::put('/enrollments/{enrollment}', [EnrollmentController::class, 'update'])->name('enrollments.update');
     });

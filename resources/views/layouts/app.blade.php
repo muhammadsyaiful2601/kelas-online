@@ -8,7 +8,6 @@
         <title>{{ config('app.name', 'Kelas Online') }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
 
         <!-- Fonts -->

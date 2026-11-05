@@ -10,8 +10,7 @@
     <div class="p-4 space-y-2">
         <!-- Brand -->
         <div class="mb-8 flex items-center gap-2">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="w-8 h-8 rounded-lg object-cover">
-            <span class="font-bold text-xl tracking-tight">Kelas<span class="text-indigo-400">Online</span></span>
+            <x-brand-logo dark />
         </div>
 
         <!-- Navigation -->

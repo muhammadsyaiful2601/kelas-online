@@ -17,7 +17,7 @@ class LandingController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Course::with('category')->published();
+        $query = Course::with('category')->withCount('enrollments')->published();
 
         // Pencarian berdasarkan judul atau deskripsi
         if ($request->filled('search')) {
@@ -34,9 +34,14 @@ class LandingController extends Controller
         }
 
         $courses = $query->latest()->paginate(9)->withQueryString();
-        $categories = \App\Category::all();
+        $categories = \App\Category::orderBy('name')->get();
+        $stats = [
+            'courses' => Course::published()->count(),
+            'enrollments' => Enrollment::count(),
+            'categories' => $categories->count(),
+        ];
 
-        return view('landing.index', compact('courses', 'categories'));
+        return view('landing.index', compact('courses', 'categories', 'stats'));
     }
 
     /**

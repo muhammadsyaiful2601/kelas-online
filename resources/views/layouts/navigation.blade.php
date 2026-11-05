@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('images/logo.jpg') }}" alt="Kelas Online Logo" class="h-9 w-auto object-cover">
+                        <x-brand-logo />
                     </a>
                 </div>
 

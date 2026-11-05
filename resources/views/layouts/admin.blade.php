@@ -14,12 +14,7 @@
             <button onclick="toggleSidebar()" class="text-slate-600 hover:text-indigo-600 mr-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
-            <div class="flex items-center gap-2">
-                <div class="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
-                    KO
-                </div>
-                <span class="font-bold text-lg text-indigo-600 tracking-tight">Kelas<span class="text-slate-900">Online</span></span>
-            </div>
+            <x-brand-logo size="sm" />
             <div class="text-right hidden sm:block">
                 <button onclick="toggleUserMenu()" class="flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-indigo-600 transition">
                     <div class="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-xs font-bold">
@@ -34,12 +29,7 @@
     <!-- ============ DESKTOP TOPBAR ============ -->
     <nav class="fixed inset-x-0 top-0 z-40 hidden h-16 border-b border-slate-200 bg-white lg:flex">
         <div class="flex h-16 w-full items-center px-8">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
-                    KO
-                </div>
-                <span class="font-bold text-lg text-indigo-600 tracking-tight">Kelas<span class="text-slate-900">Online</span></span>
-            </div>
+            <x-brand-logo />
 
             <div class="ml-10 flex items-center gap-8">
                 <a href="{{ route('landing.index') }}" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition">Lihat Website</a>
@@ -66,12 +56,7 @@
         <div class="flex flex-col h-full">
             <!-- Header -->
             <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-slate-950">
-                <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center text-white text-[10px] font-bold">
-                        KO
-                    </div>
-                    <span class="font-bold text-sm text-indigo-300 tracking-tight">Kelas<span class="text-indigo-500">Online</span></span>
-                </div>
+                <x-brand-logo dark size="sm" />
                 <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 hover:text-white">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
