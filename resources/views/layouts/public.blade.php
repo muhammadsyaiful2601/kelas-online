@@ -23,8 +23,6 @@
                 @auth
                     <span class="max-w-32 truncate text-sm font-medium text-slate-600">{{ auth()->user()->name }}</span>
                     <x-button href="{{ route('admin.dashboard') }}">Dashboard</x-button>
-                @else
-                    <x-button href="{{ route('login') }}" variant="secondary">Masuk</x-button>
                 @endauth
             </div>
             <button @click="open = !open" :aria-expanded="open" aria-controls="mobile-menu" class="inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 ui-focus md:hidden">
@@ -41,8 +39,6 @@
                 <a @click="open = false" href="{{ route('landing.index') }}#cara-kerja" class="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 hover:bg-indigo-50">Cara Kerja</a>
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="mt-2 rounded-xl bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="mt-2 rounded-xl border border-slate-300 px-3 py-2 text-center text-sm font-semibold">Masuk</a>
                 @endauth
             </div>
         </div>
@@ -61,7 +57,6 @@
                 <div class="mt-4 flex flex-col gap-2 text-sm">
                     <a href="{{ route('landing.index') }}#kelas" class="hover:text-white">Kelas</a>
                     <a href="{{ route('landing.index') }}#cara-kerja" class="hover:text-white">Cara Kerja</a>
-                    <a href="{{ route('login') }}" class="hover:text-white">Masuk</a>
                 </div>
             </div>
         </div>
