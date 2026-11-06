@@ -93,29 +93,29 @@
 
             @if ($courses->count())
                 <div class="relative">
-                    <!-- Carousel controls (mobile only) -->
-                    <div class="absolute -top-12 right-0 flex items-center gap-2 md:hidden z-10">
-                        <button id="courseCarouselPrev"
-                            class="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition">
-                            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </button>
-                        <button id="courseCarouselNext"
-                            class="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition">
-                            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
-                    </div>
-
                     <!-- Mobile carousel: horizontal scroll with snap -->
-                    <div class="overflow-x-auto snap-x snap-mandatory -mx-4 pb-4 md:overflow-visible md:pb-0 md:mx-0 scrollbar-hide">
-                        <div class="flex gap-6 snap-center px-4 md:px-0">
+                    <div class="scrollbar-hide -mx-4 overflow-x-auto snap-x snap-mandatory pb-4 md:hidden">
+                        <div class="flex snap-center gap-6 px-4 md:px-0">
                             @foreach ($courses as $course)
-                                <x-course-card :course="$course" class="snap-start snap-center shrink-0 w-[90%] md:w-[calc(33.333%-1rem)]" />
+                                <x-course-card :course="$course" class="w-[calc(100vw-2rem)] shrink-0 snap-start sm:w-[calc(100vw-3rem)] md:w-[calc(33.333%-1rem)]" />
                             @endforeach
                         </div>
                     </div>
 
+                    <!-- Carousel controls (mobile only) -->
+                    <div class="mt-4 flex items-center justify-center gap-2 md:hidden">
+                        <button id="courseCarouselPrev"
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm transition hover:bg-slate-50">
+                            <svg class="h-5 w-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <button id="courseCarouselNext"
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm transition hover:bg-slate-50">
+                            <svg class="h-5 w-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+
                     <!-- Desktop grid -->
-                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:block hidden">
+                    <div class="hidden grid-cols-1 gap-6 sm:grid-cols-2 md:grid lg:grid-cols-3">
                         @foreach ($courses as $course)
                             <x-course-card :course="$course" />
                         @endforeach
@@ -140,9 +140,9 @@
     <section id="cara-kerja" class="scroll-mt-20 border-y border-slate-200 bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl">
             <p class="text-sm font-semibold text-indigo-600">Cara kerja</p>
-            <h2 class="mt-1 text-3xl font-bold tracking-tight">Mulai belajar dalam tiga langkah</h2>
-            <div class="mt-10 grid gap-6 md:grid-cols-3">
-                @foreach ([['01', 'Daftar akun', 'Buat akun gratis untuk menyimpan pilihan kelas Anda.'], ['02', 'Pilih kelas', 'Cari kelas sesuai minat dan tujuan belajar Anda.'], ['03', 'Verifikasi lalu belajar', 'Kami verifikasi pendaftaran, lalu Anda siap memulai.']] as [$number, $title, $text])
+            <h2 class="mt-1 text-3xl font-bold tracking-tight">Mulai belajar dalam dua langkah</h2>
+            <div class="mt-10 grid gap-6 md:grid-cols-2">
+                @foreach ([['01', 'Pilih kelas', 'Cari kelas sesuai minat dan tujuan belajar Anda.'], ['02', 'Tunggu konfirmasi dari admin', 'Kami akan mengonfirmasi pendaftaran Anda melalui email.']] as [$number, $title, $text])
                     <article class="ui-card p-6">
                         <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-sm font-bold text-indigo-700">{{ $number }}</span>
                         <h3 class="mt-5 text-lg font-bold">{{ $title }}</h3>
