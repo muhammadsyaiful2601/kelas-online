@@ -17,6 +17,7 @@ class StoreCategoryRequest extends FormRequest
             'name'     => 'required|string|max:255|unique:categories,name',
             'slug'     => 'required|string|max:255|unique:categories,slug',
             'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 

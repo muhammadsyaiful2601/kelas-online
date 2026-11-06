@@ -8,7 +8,7 @@
     <link rel="icon" type="image/jpg" href="{{ asset('images/logo.jpg') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-brand-background text-brand-text antialiased">
+<body class="overflow-x-hidden bg-brand-background text-brand-text antialiased">
     <header x-data="{ open: false }" class="sticky top-0 z-50 border-b border-brand-border/80 bg-white/95 backdrop-blur">
         <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Navigasi utama">
             <a href="{{ route('landing.index') }}" aria-label="KelasOnline beranda">

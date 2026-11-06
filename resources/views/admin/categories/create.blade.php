@@ -7,7 +7,7 @@
         <h1 class="text-2xl font-bold text-gray-900 mb-6">Tambah Kategori</h1>
 
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <form method="POST" action="{{ route('admin.categories.store') }}">
+            <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-4">
@@ -34,6 +34,18 @@
                     <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
                     <textarea name="description" id="description" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">{{ old('description') }}</textarea>
                     @error('description')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Foto Kategori</label>
+                    <input type="file" name="image" id="image" accept="image/jpeg,image/png,image/webp"
+                        data-image-preview-input="categoryImagePreview"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 file:mr-3 file:rounded-md file:border-0 file:bg-indigo-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-indigo-700">
+                    <p class="mt-1 text-xs text-gray-500">Format JPG, PNG, atau WEBP. Maksimal 2 MB.</p>
+                    <img id="categoryImagePreview" class="mt-3 hidden h-32 w-full rounded-lg object-cover" alt="Preview foto kategori">
+                    @error('image')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>

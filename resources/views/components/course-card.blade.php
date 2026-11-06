@@ -1,6 +1,6 @@
 @props(['course'])
 
-<article class="ui-card group flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+<article {{ $attributes->merge(['class' => 'ui-card group flex h-full min-w-0 flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:shadow-lg']) }}>
     @if ($course->image)
         <img
             src="{{ \Illuminate\Support\Facades\Storage::url($course->image) }}"
@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <div class="flex flex-1 flex-col p-5">
+    <div class="flex min-w-0 flex-1 flex-col p-5">
         <div class="mb-3 flex items-center justify-between gap-3">
             <x-badge>{{ $course->category->name }}</x-badge>
             <span class="inline-flex items-center gap-1 text-xs text-slate-500">

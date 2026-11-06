@@ -6,6 +6,24 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+document.addEventListener('change', (event) => {
+    const input = event.target.closest('[data-image-preview-input]');
+    if (!input || !input.files?.[0]) return;
+
+    const preview = document.getElementById(input.dataset.imagePreviewInput);
+    if (!preview) return;
+
+    const file = input.files[0];
+    if (!file.type.startsWith('image/')) {
+        input.value = '';
+        preview.classList.add('hidden');
+        return;
+    }
+
+    preview.src = URL.createObjectURL(file);
+    preview.classList.remove('hidden');
+});
+
 // Course carousel navigation (mobile)
 document.addEventListener('DOMContentLoaded', () => {
     const carousel = document.querySelector('.overflow-x-auto.snap-x');

@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="mb-8 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         @php
             $stats = [
                 [
@@ -65,14 +65,14 @@
         @endphp
 
         @foreach ($stats as $stat)
-            <div class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+            <div class="group min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:p-5">
                 <div class="mb-4 flex items-center justify-between">
                     <div class="flex h-11 w-11 items-center justify-center rounded-xl {{ $stat['gradient'] }} transition-transform duration-200 group-hover:scale-110">
                         <svg class="w-5 h-5 {{ $stat['iconColor'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{$stat['icon']}}"></path></svg>
                     </div>
                 </div>
-                <p class="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">{{ $stat['title'] }}</p>
-                <p class="mb-1 text-3xl font-bold tracking-tight text-slate-900">{{ $stat['value'] }}</p>
+                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400 sm:text-xs">{{ $stat['title'] }}</p>
+                <p class="mb-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">{{ $stat['value'] }}</p>
                 <p class="text-xs text-slate-400">{{ $stat['subtitle'] }}</p>
             </div>
         @endforeach

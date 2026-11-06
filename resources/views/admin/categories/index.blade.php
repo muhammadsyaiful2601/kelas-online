@@ -20,6 +20,7 @@
             <table class="w-full text-left">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th class="px-6 py-3 text-sm font-semibold text-gray-500 uppercase">Foto</th>
                         <th class="px-6 py-3 text-sm font-semibold text-gray-500 uppercase">Nama</th>
                         <th class="px-6 py-3 text-sm font-semibold text-gray-500 uppercase">Slug</th>
                         <th class="px-6 py-3 text-sm font-semibold text-gray-500 uppercase">Deskripsi</th>
@@ -29,6 +30,13 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($categories as $category)
                         <tr>
+                            <td class="px-6 py-4">
+                                @if ($category->image)
+                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($category->image) }}" alt="{{ $category->name }}" class="h-12 w-16 rounded-md border border-gray-200 object-cover">
+                                @else
+                                    <div class="flex h-12 w-16 items-center justify-center rounded-md bg-gray-100 text-xs text-gray-400">Tanpa Foto</div>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 text-sm text-gray-900">{{ $category->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-500 font-mono">{{ $category->slug }}</td>
                             <td class="px-6 py-4 text-sm text-gray-500">{{ $category->description ?? '-' }}</td>
@@ -49,7 +57,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">Belum ada kategori.</td>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada kategori.</td>
                         </tr>
                     @endforelse
                 </tbody>

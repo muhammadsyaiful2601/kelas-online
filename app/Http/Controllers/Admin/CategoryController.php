@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -28,6 +29,10 @@ class CategoryController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['slug'] ?? $data['name']);
 
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
+
         Category::create($data);
 
         return redirect()->route('admin.categories.index')
@@ -44,6 +49,13 @@ class CategoryController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['slug'] ?? $data['name']);
 
+        if ($request->hasFile('image')) {
+            if ($category->image) {
+                Storage::disk('public')->delete($category->image);
+            }
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
+
         $category->update($data);
 
         return redirect()->route('admin.categories.index')
@@ -52,6 +64,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
+        }
+
         $category->delete();
 
         return redirect()->route('admin.categories.index')
