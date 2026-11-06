@@ -140,9 +140,9 @@
     <section id="cara-kerja" class="scroll-mt-20 border-y border-slate-200 bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl">
             <p class="text-sm font-semibold text-indigo-600">Cara kerja</p>
-            <h2 class="mt-1 text-3xl font-bold tracking-tight">Mulai belajar dalam dua langkah</h2>
-            <div class="mt-10 grid gap-6 md:grid-cols-2">
-                @foreach ([['01', 'Pilih kelas', 'Cari kelas sesuai minat dan tujuan belajar Anda.'], ['02', 'Tunggu konfirmasi dari admin', 'Kami akan mengonfirmasi pendaftaran Anda melalui email.']] as [$number, $title, $text])
+            <h2 class="mt-1 text-3xl font-bold tracking-tight">Mulai belajar dalam tiga langkah</h2>
+            <div class="mt-10 grid gap-6 md:grid-cols-3">
+                @foreach ([['01', 'Pilih kelas', 'Cari kelas sesuai minat dan tujuan belajar Anda.'], ['02', 'Isi form pendaftaran', 'Isi formulir pendaftaran dengan data lengkap Anda.'], ['03', 'Tunggu konfirmasi admin di email', 'Kami akan mengonfirmasi pendaftaran Anda melalui email.']] as [$number, $title, $text])
                     <article class="ui-card p-6">
                         <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-sm font-bold text-indigo-700">{{ $number }}</span>
                         <h3 class="mt-5 text-lg font-bold">{{ $title }}</h3>
