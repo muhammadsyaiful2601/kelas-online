@@ -107,9 +107,9 @@
 
                     <!-- Mobile carousel: horizontal scroll with snap -->
                     <div class="overflow-x-auto snap-x snap-mandatory -mx-4 pb-4 md:overflow-visible md:pb-0 md:mx-0 scrollbar-hide">
-                        <div class="flex gap-6 snap-center min-w-[calc(100vw-2rem)] md:min-w-auto md:flex-wrap md:w-full px-4 md:px-0">
+                        <div class="flex gap-6 snap-center px-4 md:px-0">
                             @foreach ($courses as $course)
-                                <x-course-card :course="$course" class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)]" />
+                                <x-course-card :course="$course" class="snap-start snap-center shrink-0 w-[90%] md:w-[calc(33.333%-1rem)]" />
                             @endforeach
                         </div>
                     </div>

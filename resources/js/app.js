@@ -14,7 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!carousel || !prevBtn || !nextBtn) return;
 
-    const scrollAmount = 320; // approx width of one course card + gap on mobile
+    let scrollAmount = window.innerWidth * 0.9; // one card width (90% of viewport)
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+        scrollAmount = window.innerWidth * 0.9;
+    });
 
     prevBtn.addEventListener('click', () => {
         carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
