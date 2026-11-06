@@ -92,10 +92,34 @@
             </form>
 
             @if ($courses->count())
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    @foreach ($courses as $course)
-                        <x-course-card :course="$course" />
-                    @endforeach
+                <div class="relative">
+                    <!-- Carousel controls (mobile only) -->
+                    <div class="absolute -top-12 right-0 flex items-center gap-2 md:hidden z-10">
+                        <button id="courseCarouselPrev"
+                            class="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition">
+                            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <button id="courseCarouselNext"
+                            class="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition">
+                            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+
+                    <!-- Mobile carousel: horizontal scroll with snap -->
+                    <div class="overflow-x-auto snap-x snap-mandatory -mx-4 pb-4 md:overflow-visible md:pb-0 md:mx-0 scrollbar-hide">
+                        <div class="flex gap-6 snap-center min-w-[calc(100vw-2rem)] md:min-w-auto md:flex-wrap md:w-full px-4 md:px-0">
+                            @foreach ($courses as $course)
+                                <x-course-card :course="$course" class="snap-start shrink-0 w-full md:w-[calc(33.333%-1rem)]" />
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Desktop grid -->
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:block hidden">
+                        @foreach ($courses as $course)
+                            <x-course-card :course="$course" />
+                        @endforeach
+                    </div>
                 </div>
             @else
                 <div class="ui-card py-14 text-center">
